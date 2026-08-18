@@ -1,0 +1,66 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Visual Studio / .NET
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.cache
+*.pdb
+*.dll
+*.exe
+*.log
+*.tmp
+*.tmp_proj
+*.pidb
+*.svclog
+*.scc
+*.dbmdl
+*.jfm
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# ReSharper / Rider
+_ReSharper*/
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Local config / secrets
+.env
+.env.*
+appsettings.Development.json
+secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test / coverage output
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Solution-specific
+Solution1/**/[Bb]in/
+Solution1/**/[Oo]bj/
+Solution1/**/*.user
+Solution1/*.suo
+MakeYourOwnPizza.Presentation/Properties/launchSettings.json
+docker-compose.override.yml
