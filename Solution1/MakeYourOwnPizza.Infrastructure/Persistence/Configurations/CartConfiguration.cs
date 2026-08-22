@@ -12,7 +12,7 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Configurations
             builder.Property(c => c.UserId).IsRequired();
             builder.Property(c => c.createdAt).IsRequired();
             builder.Property(c => c.IsDeleted).IsRequired();
-            builder.HasIndex(c => c.UserId).IsUnique();
+            builder.HasIndex(c => c.UserId);
             builder.HasOne(c => c.User)
                 .WithOne(u => u.Cart)
                 .HasForeignKey<Cart>(c => c.UserId)
