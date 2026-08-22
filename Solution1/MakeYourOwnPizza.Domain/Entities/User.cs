@@ -23,5 +23,7 @@ namespace MakeYourOwnPizza.Domain.Entities
         public bool isDeleted { get; set; } = false;
         public ICollection<Order> orders { get; set; } = new HashSet<Order>();
         public ICollection<EmailVerification> EmailVerifications { get; set; } = new HashSet<EmailVerification>();
+
+        public Cart Cart { get; set; }
     }
 }

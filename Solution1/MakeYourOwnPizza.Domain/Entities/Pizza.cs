@@ -11,5 +11,8 @@ namespace MakeYourOwnPizza.Domain.Entities
         public Guid Id { get; set; }
         public string name { get; set; }
         public decimal price { get; set; }
+
+        public ICollection<OrderItem> Orderitems { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
     }
 }

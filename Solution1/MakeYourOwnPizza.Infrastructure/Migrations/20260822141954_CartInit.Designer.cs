@@ -4,6 +4,7 @@ using MakeYourOwnPizza.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MakeYourOwnPizza.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260822141954_CartInit")]
+    partial class CartInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,33 +125,32 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
                     b.ToTable("EmailVerification");
                 });
 
-            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Ingredients", b =>
+            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("imageUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
+                    b.Property<Guid>("orderId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<Guid>("pizzaId")
+                        .HasColumnType("char(36)");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("stock")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("quantity")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredients");
-                });
+                    b.HasIndex("orderId");
 
+                    b.HasIndex("pizzaId");
+
+                    b.ToTable("OrderItem");
+                });
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -210,36 +212,7 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
                     b.ToTable("OrderIngredient");
                 });
 
-            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.OrderItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    // Note: single FK property `pizzaId` is used on OrderItem (defined below).
-
-                    b.Property<Guid>("orderId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("pizzaId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<decimal>("price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("quantity")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    // Index for duplicate-cased 'PizzaId' removed; existing index on 'pizzaId' remains.
-
-                    b.HasIndex("orderId");
-
-                    b.HasIndex("pizzaId");
-
-                    b.ToTable("OrderItem");
-                });
+            // OrderItem entity mapping consolidated above.
 
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.OrderStage", b =>
                 {

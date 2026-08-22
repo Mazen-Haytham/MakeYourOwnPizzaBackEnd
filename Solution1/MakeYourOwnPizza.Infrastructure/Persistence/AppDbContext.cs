@@ -19,7 +19,9 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence
         public DbSet<OrderStage> OrderStage { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<EmailVerification> EmailVerification { get; set; }
-
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItem>CartItem { get; set; }
+        public DbSet<CartIngredient>CartIngredient { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
