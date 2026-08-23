@@ -31,5 +31,13 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             
             return Ok(orders);
         }
+        [Authorize(Roles="Customer")]
+        [HttpGet("{orderId:guid}")]
+        public async Task<ActionResult<GetOrderDetailsResponse?>> GetOrderDetails(Guid orderId)
+        {
+            var order=await _orderService.GetOrderDetailsAsync(orderId);
+            if (order == null) return NotFound("No Order Found");
+            return Ok(order);
+        }
     }
 }

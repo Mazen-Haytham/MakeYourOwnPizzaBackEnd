@@ -16,7 +16,7 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<GetOrderDetailsResponse?> GetOrdersDetailsByUserIdAsync(Guid orderId)
+        public async Task<GetOrderDetailsResponse?> GetOrdersDetailsAsync(Guid orderId)
         {
             return await _context.Order
                 .Where(o => o.Id == orderId)
@@ -26,6 +26,7 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
                     TotalPrice = o.totalPrice,
                     PaymentMethod = o.paymentMethod,
                     CustomerPhone = o.user.phone,
+                    createdAt=o.createdAt,
                     status = o.orderStages.OrderByDescending(s => s.createdAt).ThenByDescending(s => s.Id).Select(s => s.stageType).FirstOrDefault() ?? string.Empty,
                     Pizzas = o.orderItems.Select(p => new GetPizzaDto
                     {
