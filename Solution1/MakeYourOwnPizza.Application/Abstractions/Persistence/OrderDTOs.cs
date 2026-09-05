@@ -20,6 +20,7 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
         public PaymentMethod PaymentMethod { get; set; }
         public string CustomerPhone { get; set; } = string.Empty;
         public string status { get; set; } = string.Empty;
+        public DateTimeOffset createdAt {get;set;}
         public List<GetPizzaDto> Pizzas { get; set; } = new List<GetPizzaDto>();
     }
 

@@ -8,5 +8,6 @@ namespace MakeYourOwnPizza.Application.Orders
     public interface IOrderService
     {
         Task<ICollection<GetOrderResponse>> GetOrdersByUserIdAsync(Guid userId, bool isActive);
+        Task<GetOrderDetailsResponse?> GetOrderDetailsAsync(Guid orderId);
     }
 }
