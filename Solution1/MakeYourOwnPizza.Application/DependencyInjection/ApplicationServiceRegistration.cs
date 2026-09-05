@@ -4,7 +4,7 @@ using MakeYourOwnPizza.Application.Users;
 using MakeYourOwnPizza.Application.Orders;
 using MakeYourOwnPizza.Application.Verification;
 using MakeYourOwnPizza.Application.Contracts.APIs;
-
+using MakeYourOwnPizza.Application.Ingredient;
 namespace MakeYourOwnPizza.Application.DependencyInjection
 {
     public static class ApplicationServiceRegistration
@@ -15,7 +15,7 @@ namespace MakeYourOwnPizza.Application.DependencyInjection
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IVerificationService, VerificationService>();
-
+            services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IAuthApi, AuthApi>();
             services.AddScoped<IVerificationApi, VerificationApi>();
 

@@ -34,7 +34,7 @@ namespace MakeYourOwnPizza.Infrastructure.DependencyInjection
             services.AddScoped<IPasswordHasher<User>, Microsoft.AspNetCore.Identity.PasswordHasher<User>>();
             services.AddScoped<IPasswordHasher, Authentication.PasswordHasher>();
             services.AddScoped<ITokenService, JwtTokenService>();
-            
+            services.AddScoped<IIngredientRepo, IngredientRepo>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOtpService, OtpService>();
 

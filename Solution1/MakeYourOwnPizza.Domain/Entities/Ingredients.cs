@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MakeYourOwnPizza.Domain.Enums;
 
 namespace MakeYourOwnPizza.Domain.Entities
 {
@@ -10,9 +11,10 @@ namespace MakeYourOwnPizza.Domain.Entities
     {
         public Guid Id { get; set; }
         public string name { get; set; }
-        public decimal stock { get; set; }
+        public string colorHex { get; set; }
         public decimal price { get; set; }
-        public string imageUrl { get; set; }
+        public bool isAvailable { get; set; } = true;
+        public IngredientCategory category { get; set; }
         public ICollection<OrderIngredient> orderIngredients { get; set; } = new HashSet<OrderIngredient>();
     }
 }

@@ -10,9 +10,9 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(i => i.Id);
             builder.Property(i => i.name).IsRequired().HasMaxLength(50);
-            builder.Property(i => i.stock).IsRequired().HasColumnType("decimal(18,2)");
+            builder.Property(i=>i.colorHex).IsRequired().HasMaxLength(7);   
             builder.Property(i => i.price).IsRequired().HasColumnType("decimal(18,2)");
-            builder.Property(i => i.imageUrl).HasMaxLength(500);
+            builder.Property(i => i.isAvailable).IsRequired().HasDefaultValue(true);
             builder.HasMany(i => i.orderIngredients)
                    .WithOne(oi => oi.Ingredient)
                    .HasForeignKey(oi => oi.ingredientId);
