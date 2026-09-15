@@ -76,7 +76,7 @@ namespace MakeYourOwnPizza.Application.Auth
                 if (_verificationApi != null)
                 {
                     await _verificationApi.AddEmailVerificationAsync(user.Id, otp);
-                    // await _emailService.SendVerificationEmailAsync(user.email, otp);
+                    await _emailService.SendVerificationEmailAsync(user.email, otp);
                 }
             }
             catch (Exception ex)
