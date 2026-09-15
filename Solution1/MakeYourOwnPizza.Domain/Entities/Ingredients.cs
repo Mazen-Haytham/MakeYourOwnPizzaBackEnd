@@ -9,10 +9,10 @@ namespace MakeYourOwnPizza.Domain.Entities
     public class Ingredients
     {
         public Guid Id { get; set; }
-        public string name { get; set; }
+        public string name { get; set; } = string.Empty;
         public decimal stock { get; set; }
         public decimal price { get; set; }
-        public string imageUrl { get; set; }
+        public string imageUrl { get; set; } = string.Empty;
         public ICollection<OrderIngredient> orderIngredients { get; set; } = new HashSet<OrderIngredient>();
     }
 }
