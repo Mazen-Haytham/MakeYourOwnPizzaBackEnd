@@ -11,5 +11,6 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
         Task<List<GetIngredientDTO>> GetAllIngredientsAsync();
         Task<GetIngredientDTO?> GetIngredientByIdAsync(Guid id);
         Task<GetIngredientDTO> AddIngredientAsync(Ingredients ingredient);
+        Task<bool> DeleteIngredientAsync(Guid id);
     }
 }

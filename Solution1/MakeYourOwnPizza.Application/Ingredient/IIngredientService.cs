@@ -11,5 +11,6 @@ namespace MakeYourOwnPizza.Application.Ingredient
         Task<List<GetIngredientDTO>> GetAllIngredientsAsync();
         Task<GetIngredientDTO?> GetIngredientByIdAsync(Guid id);
         Task<GetIngredientDTO> AddIngredientAsync(AddIngredientDTO ingredient);
+        Task<bool> DeleteIngredientAsync(Guid id);
     }
 }

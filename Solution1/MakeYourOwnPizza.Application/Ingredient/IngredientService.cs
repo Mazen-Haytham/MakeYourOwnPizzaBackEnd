@@ -29,10 +29,14 @@ namespace MakeYourOwnPizza.Application.Ingredient
                 name = ingredient.Name,
                 price = ingredient.Price,
                 colorHex = ingredient.colorHex,
-                isAvailable = ingredient.isAvailable,
+                isAvailable = true,
                 category = ingredient.category
             };
             return await _ingredientRepo.AddIngredientAsync(newIngredient);
+        }
+        public async Task<bool> DeleteIngredientAsync(Guid id)
+        {
+            return await _ingredientRepo.DeleteIngredientAsync(id);
         }
     }
 }

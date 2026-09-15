@@ -63,5 +63,16 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
                 category = ingredient.category
             };
         }
+        public async Task<bool> DeleteIngredientAsync(Guid id)
+        {
+            var ingredient = await _context.Ingredients.FindAsync(id);
+            if (ingredient == null)
+            {
+                return false;
+            }
+            _context.Ingredients.Remove(ingredient);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
