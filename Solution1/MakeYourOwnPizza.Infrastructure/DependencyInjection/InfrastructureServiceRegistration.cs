@@ -12,6 +12,8 @@ using MakeYourOwnPizza.Infrastructure.Email;
 using MakeYourOwnPizza.Infrastructure.Persistence;
 using MakeYourOwnPizza.Infrastructure.Persistence.Repositories;
 using MakeYourOwnPizza.Infrastructure.Services;
+using MakeYourOwnPizza.Application.Cart;
+
 
 namespace MakeYourOwnPizza.Infrastructure.DependencyInjection
 {
@@ -30,6 +32,7 @@ namespace MakeYourOwnPizza.Infrastructure.DependencyInjection
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVerificationRepository, VerificationRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             services.AddScoped<IPasswordHasher<User>, Microsoft.AspNetCore.Identity.PasswordHasher<User>>();
             services.AddScoped<IPasswordHasher, Authentication.PasswordHasher>();
@@ -37,6 +40,8 @@ namespace MakeYourOwnPizza.Infrastructure.DependencyInjection
             services.AddScoped<IIngredientRepo, IngredientRepo>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOtpService, OtpService>();
+            services.AddScoped<ICartService, CartService>();
+            
 
             return services;
         }
