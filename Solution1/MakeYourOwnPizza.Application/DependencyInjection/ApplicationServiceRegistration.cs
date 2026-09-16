@@ -18,6 +18,7 @@ namespace MakeYourOwnPizza.Application.DependencyInjection
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IAuthApi, AuthApi>();
             services.AddScoped<IVerificationApi, VerificationApi>();
+            services.AddScoped<MakeYourOwnPizza.Application.Drivers.IDriverService, MakeYourOwnPizza.Application.Drivers.DriverService>();
 
             // Register Lazy<IAuthApi> to break circular dependency:
             // AuthService -> IVerificationApi -> VerificationService -> Lazy<IAuthApi>

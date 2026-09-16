@@ -9,5 +9,7 @@ namespace MakeYourOwnPizza.Application.Orders
     {
         Task<ICollection<GetOrderResponse>> GetOrdersByUserIdAsync(Guid userId, bool isActive);
         Task<GetOrderDetailsResponse?> GetOrderDetailsAsync(Guid orderId);
+        Task<bool> UpdateOrderStatusAsync(Guid orderId, string status);
+        Task<Guid> PlaceOrderAsync(Guid userId, MakeYourOwnPizza.Application.Abstractions.Persistence.CheckoutOrderRequest request);
     }
 }

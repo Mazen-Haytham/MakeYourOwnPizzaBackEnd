@@ -11,6 +11,7 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence
         }
         
         public DbSet<User> User { get; set; }
+        public DbSet<Driver> Driver { get; set; }
         public DbSet<Ingredients> Ingredients { get; set; }
         public DbSet<Pizza> Pizza { get; set; }
         public DbSet<Order> Order { get; set; }

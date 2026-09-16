@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,5 +25,6 @@ namespace MakeYourOwnPizza.Domain.Entities
         public ICollection<EmailVerification> EmailVerifications { get; set; } = new HashSet<EmailVerification>();
 
         public Cart Cart { get; set; }
+        public Driver Driver { get; set; }
     }
 }

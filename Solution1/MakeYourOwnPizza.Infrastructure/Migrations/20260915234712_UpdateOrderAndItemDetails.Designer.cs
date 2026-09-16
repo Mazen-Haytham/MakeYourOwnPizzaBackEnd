@@ -4,6 +4,7 @@ using MakeYourOwnPizza.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MakeYourOwnPizza.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260915234712_UpdateOrderAndItemDetails")]
+    partial class UpdateOrderAndItemDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,31 +94,6 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
                     b.HasIndex("PizzaId");
 
                     b.ToTable("CartItem");
-                });
-
-            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Driver", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Zone")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Driver");
                 });
 
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.EmailVerification", b =>
@@ -281,9 +259,6 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
 
                     b.Property<Guid?>("PizzaId")
                         .HasColumnType("char(36)");
-
-                    b.Property<string>("description")
-                        .HasColumnType("longtext");
 
                     b.Property<Guid>("orderId")
                         .HasColumnType("char(36)");
@@ -493,17 +468,6 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
                     b.Navigation("Pizza");
                 });
 
-            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Driver", b =>
-                {
-                    b.HasOne("MakeYourOwnPizza.Domain.Entities.User", "User")
-                        .WithOne("Driver")
-                        .HasForeignKey("MakeYourOwnPizza.Domain.Entities.Driver", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.EmailVerification", b =>
                 {
                     b.HasOne("MakeYourOwnPizza.Domain.Entities.User", "User")
@@ -517,8 +481,8 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
 
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("MakeYourOwnPizza.Domain.Entities.Driver", "driver")
-                        .WithMany("Orders")
+                    b.HasOne("MakeYourOwnPizza.Domain.Entities.User", "driver")
+                        .WithMany()
                         .HasForeignKey("driverId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -611,11 +575,6 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
                     b.Navigation("Ingredients");
                 });
 
-            modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Driver", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.Ingredients", b =>
                 {
                     b.Navigation("orderIngredients");
@@ -645,9 +604,6 @@ namespace MakeYourOwnPizza.Infrastructure.Migrations
             modelBuilder.Entity("MakeYourOwnPizza.Domain.Entities.User", b =>
                 {
                     b.Navigation("Cart")
-                        .IsRequired();
-
-                    b.Navigation("Driver")
                         .IsRequired();
 
                     b.Navigation("EmailVerifications");

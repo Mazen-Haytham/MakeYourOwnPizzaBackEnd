@@ -33,6 +33,7 @@ namespace MakeYourOwnPizza.Infrastructure.DependencyInjection
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVerificationRepository, VerificationRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<MakeYourOwnPizza.Application.Abstractions.Persistence.IDriverRepository, DriverRepository>();
 
             services.AddScoped<IPasswordHasher<User>, Microsoft.AspNetCore.Identity.PasswordHasher<User>>();
             services.AddScoped<IPasswordHasher, Authentication.PasswordHasher>();

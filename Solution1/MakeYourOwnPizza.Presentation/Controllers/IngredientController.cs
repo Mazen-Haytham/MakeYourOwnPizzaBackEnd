@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MakeYourOwnPizza.Application.Ingredient;
 using MakeYourOwnPizza.Application.Abstractions.Persistence;
 using Microsoft.AspNetCore.Authorization;
 namespace MakeYourOwnPizza.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Ingredients")]
     [ApiController]
     public class IngredientController : ControllerBase
     {
@@ -33,8 +33,8 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             }
             return Ok(ingredient);
         }
-        [Authorize(Roles = "Manager")]
-        [HttpGet("all")]
+        
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<GetIngredientDTO>>> GetAllIngredients()
         {
             var ingredients = await _ingredientService.GetAllIngredientsAsync();

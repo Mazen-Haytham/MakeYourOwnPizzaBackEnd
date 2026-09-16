@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,11 +23,11 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
     }
     public class GetIngredientDTO
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; } = string.Empty;
         public string Name { get; set; } = null!;
         public decimal Price { get; set; }
-        public string colorHex { get; set; }
+        public string colorHex { get; set; } = string.Empty;
         public bool isAvailable { get; set; } = true;
-        public IngredientCategory category { get; set; }
+        public string category { get; set; } = string.Empty;
     }
 }
