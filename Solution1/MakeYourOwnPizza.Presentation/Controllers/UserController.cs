@@ -16,14 +16,14 @@ namespace MakeYourOwnPizza.Presentation.Controllers
         {
             _userService = userService;
         }
-
+        [Authorize(Roles="Manager")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var users = await _userService.GetAllAsync();
             return Ok(users);
         }
-
+        
         [HttpPut("me")]
         public async Task<IActionResult> Update([FromBody] UpdateUserRequest request)
         {
