@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,12 +20,12 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
             return await _context.Ingredients
                 .Select(i => new GetIngredientDTO
                 {
-                    Id = i.Id,
+                    Id = i.Id.ToString(),
                     Name = i.name,
                     Price = i.price,
                     colorHex = i.colorHex,
                     isAvailable = i.isAvailable,
-                    category = i.category
+                    category = i.category.ToString()
                 })
                 .AsNoTracking()
                 .ToListAsync();
@@ -40,12 +40,12 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
 
             return new GetIngredientDTO
             {
-                Id = ingredient.Id,
+                Id = ingredient.Id.ToString(),
                 Name = ingredient.name,
                 Price = ingredient.price,
                 colorHex = ingredient.colorHex,
                 isAvailable = ingredient.isAvailable,
-                category = ingredient.category
+                category = ingredient.category.ToString()
             };
         }
         public async Task<GetIngredientDTO> AddIngredientAsync( Ingredients ingredient)
@@ -55,12 +55,12 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
             await _context.SaveChangesAsync();
             return new GetIngredientDTO
             {
-                Id = ingredient.Id,
+                Id = ingredient.Id.ToString(),
                 Name = ingredient.name,
                 Price = ingredient.price,
                 colorHex = ingredient.colorHex,
                 isAvailable = ingredient.isAvailable,
-                category = ingredient.category
+                category = ingredient.category.ToString()
             };
         }
         public async Task<bool> DeleteIngredientAsync(Guid id)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,8 @@ namespace MakeYourOwnPizza.Domain.Entities
         public Pizza pizza { get; set; }
         public decimal quantity { get; set; }
         public decimal price { get; set; }
+        public string? size { get; set; }
+        public string? description { get; set; }
         public ICollection<OrderIngredient> orderIngredients { get; set; } = new HashSet<OrderIngredient>();
 
 

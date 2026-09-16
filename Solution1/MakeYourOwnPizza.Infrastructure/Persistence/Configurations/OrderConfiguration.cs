@@ -16,6 +16,8 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Configurations
             builder.Property(o => o.estimatedDelivery).IsRequired();
             builder.Property(o => o.isActive).IsRequired();
             builder.HasIndex(o => new { o.userId, o.isActive });
+            builder.HasIndex(o => o.driverId);
+            
             builder.HasMany(o => o.payments)
                 .WithOne(p => p.order)
                 .HasForeignKey(p => p.orderId)
@@ -32,6 +34,10 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Configurations
                 .WithMany(u => u.orders)
                 .HasForeignKey(o => o.userId)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(o => o.driver)
+                .WithMany(d => d.Orders)
+                .HasForeignKey(o => o.driverId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

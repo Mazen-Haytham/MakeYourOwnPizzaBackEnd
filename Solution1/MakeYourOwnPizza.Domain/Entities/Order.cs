@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +12,22 @@ namespace MakeYourOwnPizza.Domain.Entities
         public Guid Id { get; set; }
         public Guid userId { get; set; }
         public User user { get; set; }
+        public Guid? driverId { get; set; }
+        public Driver driver { get; set; }
         public DateTimeOffset createdAt { get; set; } = DateTimeOffset.Now;
         public DateTimeOffset estimatedDelivery { get; set; }
         public decimal totalPrice { get; set; }
         public PaymentMethod paymentMethod { get; set; }
+
+        public string? note { get; set; }
+
+        // Delivery Address
+        public string? street { get; set; }
+        public string? district { get; set; }
+        public string? city { get; set; }
+        public string? floor { get; set; }
+        public string? apartment { get; set; }
+        public string? formattedAddress { get; set; }
 
         public bool isActive { get; set; } = true;
 
