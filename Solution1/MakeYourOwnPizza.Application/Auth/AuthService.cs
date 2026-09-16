@@ -82,6 +82,10 @@ namespace MakeYourOwnPizza.Application.Auth
             catch (Exception ex)
             {
                 Console.WriteLine($"Verification error: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
                 throw;
             }
 

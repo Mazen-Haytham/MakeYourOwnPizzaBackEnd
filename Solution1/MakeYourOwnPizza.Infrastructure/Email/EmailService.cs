@@ -44,10 +44,10 @@ namespace MakeYourOwnPizza.Infrastructure.Email
 
             using var smtpClient = new SmtpClient(_settings.Host, _settings.Port)
             {
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(_settings.Username, _settings.Password),
                 EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false
+                DeliveryMethod = SmtpDeliveryMethod.Network
             };
 
             try
