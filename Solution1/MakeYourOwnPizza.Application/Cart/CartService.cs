@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using MakeYourOwnPizza.Application.Abstractions.Persistence;
 using MakeYourOwnPizza.Application.Cart.AddToCart;
+using MakeYourOwnPizza.Application.Cart.AddCartItem;
 using MakeYourOwnPizza.Application.Cart.GetCart;
 using MakeYourOwnPizza.Application.Cart.UpdateCartItem;
 using MakeYourOwnPizza.Application.Cart.RemoveCartItem;
@@ -26,6 +27,11 @@ namespace MakeYourOwnPizza.Application.Cart
             AddToCartRequest request)
         {
             return await _cartRepository.AddToCartAsync(userId, request);
+        }
+
+        public async Task<CartItemResponse> AddCartItemAsync(Guid userId, AddCartItemRequest request)
+        {
+            return await _cartRepository.AddCartItemAsync(userId, request);
         }
 
         public async Task<UpdateCartItemResponse> UpdateCartItemAsync(Guid userId, Guid cartItemId, UpdateCartItemRequest request)

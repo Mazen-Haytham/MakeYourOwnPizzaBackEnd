@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MakeYourOwnPizza.Application.Cart;
 using MakeYourOwnPizza.Application.Cart.AddToCart;
+using MakeYourOwnPizza.Application.Cart.AddCartItem;
 using MakeYourOwnPizza.Application.Cart.GetCart;
 using MakeYourOwnPizza.Application.Cart.UpdateCartItem;
 using MakeYourOwnPizza.Application.Cart.RemoveCartItem;
@@ -41,6 +42,17 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             var userId = User.GetUserId();
 
             var response = await _cartService.AddToCartAsync(userId, request);
+
+            return Ok(response);
+        }
+
+        [Authorize(Roles = "Customer")]
+        [HttpPost("items")]
+        public async Task<ActionResult<CartItemResponse>> AddCartItem([FromBody] AddCartItemRequest request)
+        {
+            var userId = User.GetUserId();
+
+            var response = await _cartService.AddCartItemAsync(userId, request);
 
             return Ok(response);
         }
