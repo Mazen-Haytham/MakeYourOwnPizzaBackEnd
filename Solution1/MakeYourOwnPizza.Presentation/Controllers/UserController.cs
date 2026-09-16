@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using MakeYourOwnPizza.Application.Users;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MakeYourOwnPizza.Presentation.Controllers
 {

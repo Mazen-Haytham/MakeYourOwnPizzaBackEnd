@@ -85,6 +85,26 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // Auto-seed the database for development
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<MakeYourOwnPizza.Infrastructure.Persistence.AppDbContext>();
+            var passwordHasher = services.GetRequiredService<MakeYourOwnPizza.Application.Abstractions.Authentication.IPasswordHasher>();
+            
+            // Note: Our DbSeeder expects IPasswordHasher<User> (from Microsoft.AspNetCore.Identity)
+            var identityPasswordHasher = services.GetRequiredService<Microsoft.AspNetCore.Identity.IPasswordHasher<MakeYourOwnPizza.Domain.Entities.User>>();
+            await MakeYourOwnPizza.Infrastructure.Persistence.Seed.DbSeeder.SeedAsync(context, identityPasswordHasher);
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while seeding the database.");
+        }
+    }
 }
 
 app.UseHttpsRedirection();

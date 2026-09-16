@@ -35,10 +35,10 @@ namespace MakeYourOwnPizza.Presentation.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GetIngredientDTO>>> GetAllIngredients()
+        public async Task<ActionResult<MenuResponseDTO>> GetAllIngredients()
         {
-            var ingredients = await _ingredientService.GetAllIngredientsAsync();
-            return Ok(ingredients);
+            var menu = await _ingredientService.GetAllIngredientsAsync();
+            return Ok(menu);
         }
         [Authorize(Roles = "Manager")]
         [HttpDelete("{id}")]
