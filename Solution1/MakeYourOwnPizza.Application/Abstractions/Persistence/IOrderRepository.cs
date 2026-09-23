@@ -10,6 +10,7 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
     {
         Task<GetOrderDetailsResponse?> GetOrdersDetailsAsync(Guid orderId);
         Task<ICollection<GetOrderResponse>> GetOrdersByUserIdAsync(Guid userId, bool isActive);
+        Task<ICollection<GetOrderResponse>> GetAllOrdersAsync(bool? isActive = null);
         Task<bool> UpdateOrderStatusAsync(Guid orderId, string status);
         Task<Guid> PlaceOrderAsync(Guid userId, CheckoutOrderRequest request);
     }

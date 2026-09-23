@@ -15,9 +15,9 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
         {
             _context = context;
         }
-        public async Task<List<GetIngredientDTO>> GetAllIngredientsAsync()
+        public async Task<MenuResponseDTO> GetAllIngredientsAsync()
         {
-            return await _context.Ingredients
+            var ingredients = await _context.Ingredients
                 .Select(i => new GetIngredientDTO
                 {
                     Id = i.Id.ToString(),
@@ -29,6 +29,22 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
                 })
                 .AsNoTracking()
                 .ToListAsync();
+
+            var pizzas = await _context.Pizza
+                .Select(p => new PizzaDTO
+                {
+                    Id = p.Id.ToString(),
+                    Name = p.name,
+                    Price = p.price
+                })
+                .AsNoTracking()
+                .ToListAsync();
+
+            return new MenuResponseDTO
+            {
+                Ingredients = ingredients,
+                Pizzas = pizzas
+            };
         }
         public async Task<GetIngredientDTO?> GetIngredientByIdAsync(Guid id)
         {

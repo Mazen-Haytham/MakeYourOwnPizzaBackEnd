@@ -18,6 +18,11 @@ namespace MakeYourOwnPizza.Application.Orders
         {
             return await _orderRepository.GetOrdersByUserIdAsync(userId, isActive);
         }
+
+        public async Task<ICollection<GetOrderResponse>> GetAllOrdersAsync(bool? isActive = null)
+        {
+            return await _orderRepository.GetAllOrdersAsync(isActive);
+        }
         public async Task<GetOrderDetailsResponse?> GetOrderDetailsAsync(Guid orderId)
         {
             return await _orderRepository.GetOrdersDetailsAsync(orderId);
