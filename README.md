@@ -51,7 +51,7 @@ Solution1/
 - **Framework Independent**: The system does not depend on the existence of some library of feature-laden software.
 - **Testable**: The business rules can be tested without the UI, Database, Web Server, or any other external element.
 - **Independent of UI**: The UI can change easily without changing the rest of the system.
-- **Independent of Database**: You can swap out SQL Server for MongoDB or anything else without affecting business logic.
+- **Independent of Database**: You can swap out MySQL for MongoDB or anything else without affecting business logic.
 
 ---
 
@@ -60,7 +60,7 @@ Solution1/
 - **C# / .NET 8.0**: Latest Microsoft framework for high performance.
 - **ASP.NET Core Web API**: For building RESTful HTTP services.
 - **Entity Framework Core**: Object-Relational Mapper (ORM) for data access.
-- **SQL Server**: Relational database for persistent storage.
+- **MySQL**: Relational database for persistent storage.
 - **Docker & Docker Compose**: For containerization and environment consistency.
 - **Swagger / OpenAPI**: For API documentation and testing.
 
@@ -97,7 +97,7 @@ The easiest way to get the project running with its database is via Docker.
    cd Solution1/MakeYourOwnPizza.Presentation
    ```
 
-2. Update the `appsettings.json` connection string to point to your local SQL Server instance.
+2. Update the `appsettings.json` connection string to point to your local MySQL instance.
 
 3. Apply Entity Framework Migrations to create the database:
    ```bash
