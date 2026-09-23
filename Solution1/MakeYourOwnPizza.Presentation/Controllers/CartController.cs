@@ -30,7 +30,7 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             var cart = await _cartService.GetCartByUserIdAsync(userId);
 
             if (cart == null)
-                return NotFound("Cart not found.");
+                return Ok(new GetCartResponse { Items = new List<CartItemResponse>() });
 
             return Ok(cart);
         }

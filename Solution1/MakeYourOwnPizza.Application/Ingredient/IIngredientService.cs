@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ namespace MakeYourOwnPizza.Application.Ingredient
 {
     public interface IIngredientService
     {
-        Task<List<GetIngredientDTO>> GetAllIngredientsAsync();
+        Task<MenuResponseDTO> GetAllIngredientsAsync();
         Task<GetIngredientDTO?> GetIngredientByIdAsync(Guid id);
         Task<GetIngredientDTO> AddIngredientAsync(AddIngredientDTO ingredient);
         Task<bool> DeleteIngredientAsync(Guid id);

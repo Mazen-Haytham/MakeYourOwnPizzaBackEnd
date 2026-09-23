@@ -7,8 +7,11 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
     public class GetOrderResponse
     {
         public Guid OrderId { get; set; }
+        public string Id => OrderId.ToString();
+        public string CustomerName { get; set; } = string.Empty;
         public decimal TotalPrice { get; set; }
         public decimal PizzaCount { get; set; }
+        public int ItemsCount => (int)PizzaCount;
         public DateTimeOffset CreatedAt { get; set; }
         public string Status { get; set; } = string.Empty;
     }

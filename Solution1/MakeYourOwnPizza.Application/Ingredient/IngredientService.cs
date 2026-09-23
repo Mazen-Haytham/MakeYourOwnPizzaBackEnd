@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace MakeYourOwnPizza.Application.Ingredient
         {
             _ingredientRepo = ingredientRepo;
         }
-        public async Task<List<GetIngredientDTO>> GetAllIngredientsAsync()
+        public async Task<MenuResponseDTO> GetAllIngredientsAsync()
         {
             return await _ingredientRepo.GetAllIngredientsAsync();
         }

@@ -20,18 +20,23 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             _orderService = orderService;
         }
 
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = "Customer,Manager")]
         [HttpGet]
-        public async Task<ActionResult<ICollection<GetOrderResponse>>> GetOrdersByUserId([FromQuery] bool isActive)
+        public async Task<ActionResult<ICollection<GetOrderResponse>>> GetOrders([FromQuery] bool? isActive)
         {
-            var userId = User.GetUserId();
-            var orders = await _orderService.GetOrdersByUserIdAsync(userId, isActive);
-            if (orders == null || orders.Count == 0)
-                return NotFound("No orders found for the user.");
-            
-            return Ok(orders);
+            if (User.IsInRole("Manager"))
+            {
+                var orders = await _orderService.GetAllOrdersAsync(isActive);
+                return Ok(orders ?? new List<GetOrderResponse>());
+            }
+            else
+            {
+                var userId = User.GetUserId();
+                var orders = await _orderService.GetOrdersByUserIdAsync(userId, isActive ?? true);
+                return Ok(orders ?? new List<GetOrderResponse>());
+            }
         }
-        [Authorize(Roles="Manager")]
+        [Authorize(Roles="Customer,Manager")]
         [HttpGet("{orderId:guid}")]
         public async Task<ActionResult<GetOrderDetailsResponse?>> GetOrderDetails(Guid orderId)
         {
@@ -51,6 +56,18 @@ namespace MakeYourOwnPizza.Presentation.Controllers
             if (!success) return NotFound("Order not found.");
 
             return Ok();
+        }
+
+        [Authorize(Roles = "Manager")]
+        [HttpPut("{orderId:guid}/{driverId:guid}")]
+        public async Task<IActionResult> AssignDriver(Guid orderId, Guid driverId, [FromServices] MakeYourOwnPizza.Infrastructure.Persistence.AppDbContext context)
+        {
+            var order = await Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(context.Order, o => o.Id == orderId);
+            if (order == null) return NotFound("Order not found.");
+
+            order.driverId = driverId;
+            await context.SaveChangesAsync();
+            return Ok(new { message = "Driver assigned successfully." });
         }
 
         [Authorize(Roles = "Customer")]

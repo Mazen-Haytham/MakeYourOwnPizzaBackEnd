@@ -65,6 +65,29 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Repositories
                 .Select(o => new GetOrderResponse
                 {
                     OrderId = o.Id,
+                    CustomerName = (o.user.firstName + " " + o.user.lastName).Trim(),
+                    TotalPrice = o.totalPrice,
+                    PizzaCount = o.orderItems.Count(),
+                    CreatedAt = o.createdAt,
+                    Status = o.orderStages.OrderByDescending(s => s.createdAt).ThenByDescending(s => s.Id).Select(s => s.stageType).FirstOrDefault() ?? string.Empty
+                })
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<ICollection<GetOrderResponse>> GetAllOrdersAsync(bool? isActive = null)
+        {
+            var query = _context.Order.AsQueryable();
+            if (isActive.HasValue)
+            {
+                query = query.Where(o => o.isActive == isActive.Value);
+            }
+
+            return await query
+                .Select(o => new GetOrderResponse
+                {
+                    OrderId = o.Id,
+                    CustomerName = (o.user.firstName + " " + o.user.lastName).Trim(),
                     TotalPrice = o.totalPrice,
                     PizzaCount = o.orderItems.Count(),
                     CreatedAt = o.createdAt,

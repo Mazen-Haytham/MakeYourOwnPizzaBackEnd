@@ -30,4 +30,15 @@ namespace MakeYourOwnPizza.Application.Abstractions.Persistence
         public bool isAvailable { get; set; } = true;
         public string category { get; set; } = string.Empty;
     }
+    public class PizzaDTO
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+    }
+    public class MenuResponseDTO
+    {
+        public List<GetIngredientDTO> Ingredients { get; set; } = new();
+        public List<PizzaDTO> Pizzas { get; set; } = new();
+    }
 }

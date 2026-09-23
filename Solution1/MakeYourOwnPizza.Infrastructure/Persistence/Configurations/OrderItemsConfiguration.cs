@@ -18,7 +18,7 @@ namespace MakeYourOwnPizza.Infrastructure.Persistence.Configurations
                 .HasForeignKey(oi => oi.orderId)
                 .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(oi => oi.pizza)
-                .WithMany()
+                .WithMany(p => p.Orderitems)
                 .HasForeignKey(oi => oi.pizzaId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
